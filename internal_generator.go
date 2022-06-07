@@ -63,6 +63,14 @@ func (gen *internalGenerator) Generate() string {
 	return gen.GenerateFunc()
 }
 
+func (gen *internalGenerator) GenerateN(n int) []string {
+	var ss = make([]string, n, n)
+	for i := 0; i < n; i++ {
+		ss = append(ss, gen.GenerateFunc())
+	}
+	return ss
+}
+
 func (gen *internalGenerator) String() string {
 	return gen.Name
 }

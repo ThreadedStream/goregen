@@ -178,6 +178,7 @@ func (a *GeneratorArgs) Rng() *rand.Rand {
 // Generator generates random strings.
 type Generator interface {
 	Generate() string
+	GenerateN(n int) []string
 	String() string
 }
 
@@ -194,6 +195,14 @@ func Generate(pattern string) (string, error) {
 		return "", err
 	}
 	return generator.Generate(), nil
+}
+
+func GenerateN(pattern string, n int) ([]string, error) {
+	generator, err := NewGenerator(pattern, nil)
+	if err != nil {
+		return nil, err
+	}
+	return generator.GenerateN(n), nil
 }
 
 // NewGenerator creates a generator that returns random strings that match the regular expression in pattern.
